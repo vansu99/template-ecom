@@ -1,7 +1,9 @@
-import type { NextConfig } from 'next';
-import withBundleAnalyzer from '@next/bundle-analyzer';
+/** @type {import('next').NextConfig} */
 
-const runWithBundleAnalyzer = withBundleAnalyzer({
+import withBundleAnalyzer from '@next/bundle-analyzer';
+import withPlugins from 'next-compose-plugins';
+
+const BundleAnalyzer = withBundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
 });
 
@@ -28,9 +30,10 @@ const securityHeaders = [
   },
 ];
 
-const nextConfig: NextConfig = runWithBundleAnalyzer({
+const nextConfig = {
   reactStrictMode: true,
   output: 'standalone',
+  swcMinify: true,
   compiler: {
     removeConsole:
       process.env.NODE_ENV === 'production'
@@ -39,7 +42,6 @@ const nextConfig: NextConfig = runWithBundleAnalyzer({
           }
         : false,
   },
-  swcMinify: true,
   async headers() {
     return [
       {
@@ -57,6 +59,6 @@ const nextConfig: NextConfig = runWithBundleAnalyzer({
         return { hostname: remote };
       }) ?? [],
   },
-});
+};
 
-export default nextConfig;
+export default withPlugins([BundleAnalyzer], nextConfig);
