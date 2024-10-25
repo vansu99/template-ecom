@@ -2,6 +2,6 @@
   "extends": ["next/core-web-vitals", "next/typescript", "prettier"],
   "rules": {
     "no-console": ["error", { "allow": ["warn", "error", "info"] }],
-    "no-unused-vars": "error"
+    "no-empty-interface": false
   }
 }

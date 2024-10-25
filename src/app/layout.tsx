@@ -1,16 +1,22 @@
 import type { Metadata } from 'next';
-import localFont from 'next/font/local';
+import { Noto_Sans_JP, Roboto } from 'next/font/google';
 import '../styles/globals.css';
 
-const geistSans = localFont({
-  src: './fonts/GeistVF.woff',
-  variable: '--font-geist-sans',
-  weight: '100 900',
+const notoSansJP = Noto_Sans_JP({
+  variable: '--noto-sans',
+  weight: ['100', '400', '500', '600', '700'],
+  style: 'normal',
+  display: 'fallback',
+  subsets: ['latin'],
+  fallback: ['system-ui'],
 });
-const geistMono = localFont({
-  src: './fonts/GeistMonoVF.woff',
-  variable: '--font-geist-mono',
-  weight: '100 900',
+
+const roboto = Roboto({
+  subsets: ['latin'],
+  weight: ['100', '400', '500', '700'],
+  display: 'fallback',
+  variable: '--roboto',
+  fallback: ['system-ui'],
 });
 
 export const metadata: Metadata = {
@@ -25,7 +31,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${notoSansJP.variable} ${roboto.variable} antialiased`}>
         {children}
       </body>
     </html>
