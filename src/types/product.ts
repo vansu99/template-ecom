@@ -24,7 +24,12 @@ export type ProductList = ProductItem[];
 
 export type ProductDetail = {
   id: number;
-  product_code: number;
+  code: string;
+  name: string;
+  sale_price: number;
+  price: number;
+  images: string[];
+  description: string
 };
 
 export type QueryProductPayload = {
@@ -37,3 +42,4 @@ export type QueryProductPayload = {
 };
 
 export type ProductResponse = ResponseData<{ data: ProductList; total: number }>;
+export type ProductDetailResponse = ResponseData<ProductDetail>;

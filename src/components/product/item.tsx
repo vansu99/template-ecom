@@ -14,7 +14,7 @@ function ProductItem({ item }: Props) {
   // const mainImage = item.images?.[0] || ''
 
   return (
-    <Link href={'/'} className="flex flex-col h-full">
+    <Link href={`/product/${item?.id}`} className="flex flex-col h-full">
       <div className="relative w-full text-center">
         <AspectRatio ratio={250 / 250} className="overflow-hidden">
           <Image

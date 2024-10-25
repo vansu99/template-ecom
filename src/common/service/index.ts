@@ -131,10 +131,13 @@ class ApiClient {
 
         if (!response.ok) {
           const errorData = await response.json();
-          throw Object.assign(new Error(errorData.message || 'Request failed'), {
-            status: response.status,
-            data: errorData,
-          });
+          throw (
+            (new Error(errorData.message || 'Request failed'),
+            {
+              status: response.status,
+              data: errorData,
+            })
+          );
         }
 
         let responseData: T = await response.json();
