@@ -1,6 +1,7 @@
+import '../styles/globals.css';
 import type { Metadata } from 'next';
 import { Noto_Sans_JP, Roboto } from 'next/font/google';
-import '../styles/globals.css';
+import NextTopLoader from 'nextjs-toploader';
 
 const notoSansJP = Noto_Sans_JP({
   variable: '--noto-sans',
@@ -32,6 +33,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${notoSansJP.variable} ${roboto.variable} antialiased`}>
+        <NextTopLoader />
         {children}
       </body>
     </html>
