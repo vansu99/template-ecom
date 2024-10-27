@@ -2,6 +2,15 @@
   "extends": ["next/core-web-vitals", "next/typescript", "prettier"],
   "rules": {
     "no-console": ["error", { "allow": ["warn", "error", "info"] }],
-    "no-empty-interface": false
+    "no-empty-interface": false,
+    "@typescript-eslint/array-type": "off",
+    "@typescript-eslint/consistent-type-definitions": "off",
+    "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
+    "@typescript-eslint/no-misused-promises": [
+      "error",
+      {
+        "checksVoidReturn": { "attributes": false }
+      }
+    ]
   }
 }
