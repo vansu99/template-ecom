@@ -51,6 +51,9 @@ const nextConfig = {
     ];
   },
   poweredByHeader: false,
+  experimental: {
+    optimizePackageImports: ['lucide-react'],
+  },
   images: {
     minimumCacheTTL: process.env.NODE_ENV === 'production' ? 60 : 0,
     formats: ['image/webp'],
