@@ -10,6 +10,7 @@ export interface RequestConfig {
   retries?: number;
   params?: Record<string, string>;
   cancelKey?: string | null;
+  next?: NextFetchRequestConfig;
 }
 
 export interface ApiResponse<T = unknown> {
@@ -91,15 +92,17 @@ class ApiClient {
       method = 'GET',
       headers = {},
       body,
-      timeout = 5000,
+      timeout = 3000,
       retries = 3,
       params = {},
       cancelKey = null,
+      next,
     }: RequestConfig = {},
   ): Promise<T> {
     let config: RequestInit & { headers: Record<string, string> } = {
       method,
       headers: { ...this.defaultHeaders, ...headers },
+      next,
     };
 
     if (body instanceof FormData) {
