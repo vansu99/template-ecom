@@ -15,7 +15,7 @@ function ProductItem({ item }: Props) {
 
   return (
     <Link
-      href={`/product/${item?.id}`}
+      href={`/${item?.slug}.${item?.id}`}
       className="flex flex-col h-full bg-white overflow-hidden rounded-lg hover:shadow-xl transition-shadow duration-300"
     >
       <div className="relative w-full text-center">

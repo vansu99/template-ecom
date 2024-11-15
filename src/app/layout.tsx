@@ -3,7 +3,9 @@ import '../styles/globals.css';
 import type { Metadata } from 'next';
 import { Noto_Sans_JP, Roboto } from 'next/font/google';
 import NextTopLoader from 'nextjs-toploader';
+
 import QueryClientProviders from '@/common/providers/QueryClientProvider';
+import { ErrorBoundary } from '@/components/error-boundary';
 
 const notoSansJP = Noto_Sans_JP({
   variable: '--noto-sans',
@@ -36,7 +38,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${notoSansJP.variable} ${roboto.variable} antialiased`}>
         <NextTopLoader />
-        <QueryClientProviders>{children}</QueryClientProviders>
+        <QueryClientProviders>
+          <ErrorBoundary>{children}</ErrorBoundary>
+        </QueryClientProviders>
       </body>
     </html>
   );

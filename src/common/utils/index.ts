@@ -21,3 +21,20 @@ export function isEmpty(obj: Array<any> | object): boolean {
 
   return !Object.keys(obj).length;
 }
+
+export const logger = ({ message, context }: { message: string; context?: unknown }) => {
+  return {
+    info: () => console.log(message, context),
+    error: () => {
+      process.env.NODE_ENV !== 'production' && console.error(message, context);
+    },
+    warn: () => console.warn(message, context),
+  };
+};
+
+export const extractId = (value: string) => {
+  if (value.includes('.')) {
+    return parseInt(value.split('.')[1]);
+  }
+  return parseInt(value);
+};
