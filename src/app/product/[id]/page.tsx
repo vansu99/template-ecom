@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 
 import productApis from '@/apis/product';
 import ProductDetail from '@/components/product/detail';
+import { extractId } from '@/common/utils';
 
 type PageProps = {
   params: { id: string };
@@ -11,7 +12,7 @@ type PageProps = {
 async function ProductDetailPage({ params: { id } }: PageProps) {
   let result = null;
   try {
-    const response = await productApis.detail(parseInt(id));
+    const response = await productApis.detail(extractId(id));
     const product = response.data;
     result = product;
   } catch (error) {
