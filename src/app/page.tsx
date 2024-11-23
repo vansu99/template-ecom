@@ -1,14 +1,16 @@
 import { Suspense } from 'react';
+import { getTranslations } from 'next-intl/server';
 
 import ProductList from '@/components/product/list';
+import ProductFilters from '@/components/product/filtering';
 import ProductLoadingSkeleton from '@/components/product/loading';
 import ProductSearching from '@/components/product/searching';
+import LocaleSelect from '@/components/custom-locale-select/locale-select';
 
 import productApis from '@/apis/product';
 import commonApis from '@/apis/common';
 import { PAGE_SIZE_LIST } from '@/common/constants';
 import type { ProductSearchParams, QueryProductPayload } from '@/types/product';
-import ProductFilters from '@/components/product/filtering';
 
 type PageProps = {
   searchParams: ProductSearchParams;
@@ -17,6 +19,7 @@ type PageProps = {
 export default async function Home({
   searchParams: { page = '1', q = '', sort },
 }: PageProps) {
+  const t = await getTranslations('Home');
   const payload: QueryProductPayload = {
     limit: PAGE_SIZE_LIST,
     page: parseInt(page as string) || 1,
@@ -38,9 +41,13 @@ export default async function Home({
   return (
     <main className="max-w-[128rem] mx-auto px-6 py-10">
       <p>Site name: {settingsUI?.value?.ogp_title}</p>
+      <p>{t('title')}</p>
       <Suspense fallback={<ProductLoadingSkeleton />} key={`${q}-${payload.page}`}>
         <ProductSearching />
-        <ProductFilters />
+        <div className="flex space-x-6">
+          <ProductFilters />
+          <LocaleSelect />
+        </div>
         <ProductList
           list={products}
           total={totalProduct}
