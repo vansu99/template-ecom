@@ -1,10 +1,12 @@
-import '../styles/globals.css';
+import '../styles/globals.scss';
 
 import type { Metadata } from 'next';
 import { Noto_Sans_JP, Roboto } from 'next/font/google';
 import NextTopLoader from 'nextjs-toploader';
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale, getMessages } from 'next-intl/server';
+
+import GuestLayout from '@/layouts/root';
 
 import QueryClientProviders from '@/common/providers/QueryClientProvider';
 import { ErrorBoundary } from '@/components/error-boundary';
@@ -41,11 +43,13 @@ export default async function RootLayout({
 
   return (
     <html lang={locale}>
-      <body className={`${notoSansJP.variable} ${roboto.variable} antialiased`}>
+      <body className="antialiased">
         <NextTopLoader />
         <QueryClientProviders>
           <NextIntlClientProvider messages={messages}>
-            <ErrorBoundary>{children}</ErrorBoundary>
+            <ErrorBoundary>
+              <GuestLayout>{children}</GuestLayout>
+            </ErrorBoundary>
           </NextIntlClientProvider>
         </QueryClientProviders>
       </body>

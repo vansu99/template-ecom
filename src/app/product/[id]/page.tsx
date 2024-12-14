@@ -15,7 +15,7 @@ async function ProductDetailPage({ params: { id } }: PageProps) {
     const response = await productApis.detail(extractId(id));
     const product = response.data;
     result = product;
-  } catch (error) {
+  } catch {
     notFound();
   }
 

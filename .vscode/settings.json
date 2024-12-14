@@ -6,9 +6,10 @@
   "editor.formatOnType": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit",
+    "source.fixAll.eslint": true,
     "source.fixAll.format": "explicit",
     "source.fixAll.stylelint": "explicit"
   },
-  "stylelint.validate": ["css", "scss"]
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+  "eslint.nodePath": "./node_modules/eslint"
 }

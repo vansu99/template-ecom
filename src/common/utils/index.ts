@@ -16,16 +16,18 @@ export function isEmpty(obj: Array<any> | object): boolean {
   if (!obj || typeof obj !== 'object') return !obj;
 
   if (Array.isArray(obj)) {
-    return !obj.length;
+    return obj.length === 0;
   }
 
-  return !Object.keys(obj).length;
+  return Object.keys(obj).length === 0;
 }
 
 export const logger = ({ message, context }: { message: string; context?: unknown }) => {
   return {
+    // eslint-disable-next-line no-console
     info: () => console.log(message, context),
     error: () => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       process.env.NODE_ENV !== 'production' && console.error(message, context);
     },
     warn: () => console.warn(message, context),
@@ -38,3 +40,7 @@ export const extractId = (value: string) => {
   }
   return parseInt(value);
 };
+
+export function absoluteUrl(path: string) {
+  return `${process.env.NEXT_PUBLIC_BASE_URL}${path}`;
+}

@@ -17,6 +17,7 @@ export class ErrorBoundary extends React.Component<
   constructor(props: ErrorBoundaryPropTypes) {
     super(props);
 
+    // eslint-disable-next-line react/state-in-constructor
     this.state = { hasError: false } as ErrorBoundaryStateTypes;
   }
 
@@ -26,8 +27,10 @@ export class ErrorBoundary extends React.Component<
 
   public componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     if (process.env.NODE_ENV === 'development') {
+      // eslint-disable-next-line no-console
       console.group('COMPONENT RENDERING ERROR 🚨');
       console.error({ error, errorInfo });
+      // eslint-disable-next-line no-console
       console.groupEnd();
     }
   }
@@ -35,16 +38,18 @@ export class ErrorBoundary extends React.Component<
   public render() {
     if (this.state.hasError) {
       return (
-        <div className="flex flex-col justify-center items-center gap-4 py-4 px-8">
-          <h2>Oops, compilation error {`</>`}</h2>
-          <button
-            type="button"
-            onClick={function () {
-              if (typeof window !== 'undefined') window.location.reload();
-            }}
-          >
-            <span>Try again?</span>
-          </button>
+        <div className="h-screen">
+          <div className="flex flex-col justify-center items-center gap-4 py-4 px-8">
+            <h2>Oops, compilation error {`</>`}</h2>
+            <button
+              type="button"
+              onClick={function () {
+                if (typeof globalThis !== 'undefined') globalThis.location.reload();
+              }}
+            >
+              <span>Try again?</span>
+            </button>
+          </div>
         </div>
       );
     }
